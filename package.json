@@ -1,0 +1,23 @@
+{
+   "name": "emailit",
+   "version": "1.0.0",
+   "description": "This will allow you to send emails using nodemailer, using the SMTP protocol and you would have to jsut pass relevant information to do so",
+   "main": "emailit.js",
+   "repository": {
+      "type": "git",
+      "url": "https://github.com/nodexpertsdev/emailIt"
+    },
+    "scripts": {
+       "dev": ". ./credentials.sh",
+       "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "nodexperts",
+    "license": "ISC",
+    "dependencies": {
+      "email-templates": "^3.6.0",
+      "handlebars": "^4.0.11",
+      "nodemailer": "^4.6.4",
+      "nodemailer-smtp-transport": "^2.7.4"
+   }
+}
