@@ -1,6 +1,6 @@
 {
    "name": "emailit",
-   "version": "1.6.0",
+   "version": "1.7.0",
    "description": "This will allow you to send emails using nodemailer, using the SMTP protocol and you would have to jsut pass relevant information to do so",
    "main": "emailit.js",
    "repository": {
