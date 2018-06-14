@@ -30,12 +30,12 @@ const getMailOptions = function (mailDetails, html) {
  * renderEmail
  * @param template contains name of the template
  * @param templateData contains data to be used inside the templates
- * @param dirname contains path to the template excluding emails folder
  */
-const renderEmail = function (template, templateData, dirname) {
+const renderEmail = function (template, templateData, fileFormat) {
   return new Promise((resolve, reject) => {
+    const ext = '.' + (fileFormat ? fileFormat : 'pug');
     const templateInstance = new EmailTemplate();
-    templateInstance.render(`${template}.hbs`, templateData)
+    templateInstance.render(`${template}${ext}`, templateData)
     .then((result) => {
         resolve(result);
     })
@@ -50,11 +50,10 @@ const renderEmail = function (template, templateData, dirname) {
 * @param mailDetails contains recepient, sender, subject
 * @param templateData contains data to be used inside the templates
 * @param template contains name of the template
-* @param dirname contains path to the template excluding emails folder
 */
-const sendEmail = function (mailDetails, templateData, template, dirname) {
+const sendEmail = function (mailDetails, templateData, template, fileFormat) {
   return new Promise((resolve, reject) => {
-    renderEmail(template, templateData, dirname)
+    renderEmail(template, templateData, fileFormat)
     .then((result) => {
       const mailOptions = getMailOptions(mailDetails, result);
       if(!process.env.MAIL_HOST || !process.env.MAIL_SERVICE || !process.env.MAIL_PASSWORD || !process.env.MAIL_USERNAME)
@@ -76,18 +75,16 @@ const sendEmail = function (mailDetails, templateData, template, dirname) {
  * mailIt
  * @param templates contains name of the templates
  * @param mailDetails contains recepient, sender, subject
- * @param path contains path to the template excluding emails folder
  * @param callback returns err or result
  */
-  emailit = function(template, mailDetails, path, templateData, callback) {
-            const dirname = path;
+  emailit = function(template, fileFormat, mailDetails, templateData, callback) {
 
             if (!template) {
-              return callback('template not found, please send email template name');
+              return callback('Template not found, please send email template name');
             } else if (!mailDetails.recepient || !mailDetails.sender || !mailDetails.subject) {
-              return callback('mailDetails are not complete, Kindly provide all details');
+              return callback('MailDetails are not complete, Kindly provide all details');
             }
-            sendEmail(mailDetails, templateData, template, dirname)
+            sendEmail(mailDetails, templateData, template, fileFormat)
             .then((res) => {
                 console.log('Email sent successfully', res);
                 callback(null, res);

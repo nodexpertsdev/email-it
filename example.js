@@ -1,16 +1,16 @@
-const emailit = require('./emailit');
-
+const emailit = require('./emailit'); //use require(emailit) when installed in project
 const example = function() {
   const mailDetails = {
     'recepient': 'efg@hij.com',
     'sender': 'abc@def.com',
     'subject': 'Its Working'
   }
-  const path = '/';
+
   const templateData = {
     name: "XYZ"
   }
-  emailit(template = 'verify-email', mailDetails, path, templateData, (err,res)=> {
+
+  emailit(template = 'verify-email', fileFormat = 'hbs', mailDetails, templateData, (err,res)=> {
     if(err) {
       console.log('Sending email Failed');
     } else {
