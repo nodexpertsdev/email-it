@@ -5,7 +5,7 @@
    "main": "emailit.js",
    "repository": {
       "type": "git",
-      "url": "https://github.com/nodexpertsdev/emailIt"
+      "url": "https://github.com/nodexpertsdev/email-it"
    },
    "scripts": {
       "dev": ". ./credentials.sh",
